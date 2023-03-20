@@ -1,6 +1,134 @@
 <div align = "center" style="font-size:40px"style="font-weight:bold" >目录</div>
 
-[TOC]
+- [1 实验环境的简介与搭建](#1-实验环境的简介与搭建)
+	- [1.1 VMware Workstation](#11-vmware-workstation)
+	- [1.2 Ubuntu](#12-ubuntu)
+	- [1.3 Bochs](#13-bochs)
+	- [1.4 NASM、GCC和GNU MAKE](#14-nasmgcc和gnu-make)
+- [2 马上动手写一个最小的“操作系统”](#2-马上动手写一个最小的操作系统)
+	- [2.1 实验1 十分钟完成操作系统](#21-实验1-十分钟完成操作系统)
+		- [2.1.1 关键代码](#211-关键代码)
+		- [2.1.2 主要代码结构](#212-主要代码结构)
+		- [2.1.3 代码执行流程图](#213-代码执行流程图)
+		- [2.1.4 函数调用关系图](#214-函数调用关系图)
+		- [2.1.5 调试过程](#215-调试过程)
+		- [2.1.6 实验分析](#216-实验分析)
+- [3 保护模式](#3-保护模式)
+	- [3.1 实验1 进入保护模式](#31-实验1-进入保护模式)
+		- [3.1.1 关键代码](#311-关键代码)
+		- [3.1.2主要代码结构的流程图](#312主要代码结构的流程图)
+		- [3.1.3 调试过程和实验结果](#313-调试过程和实验结果)
+		- [3.1.4 实验分析](#314-实验分析)
+	- [3.2 实验2 保护模式进阶——从保护模式返回实模式](#32-实验2-保护模式进阶从保护模式返回实模式)
+		- [3.2.1 关键代码](#321-关键代码)
+		- [3.2.2 主要代码结构流程图](#322-主要代码结构流程图)
+		- [3.2.3 调试过程](#323-调试过程)
+		- [3.2.4 实验分析](#324-实验分析)
+	- [3.3 实验3 局部描述符表LDT](#33-实验3-局部描述符表ldt)
+		- [3.3.1 关键代码](#331-关键代码)
+		- [3.3.2 代码主要结构流程图](#332-代码主要结构流程图)
+		- [3.3.4 函数调用图](#334-函数调用图)
+		- [3.3.5 实验结果](#335-实验结果)
+		- [3.3.6 实验分析](#336-实验分析)
+- [4 让操作系统走进保护模式](#4-让操作系统走进保护模式)
+	- [4.1 实验1 DOS可以识别的引导盘](#41-实验1-dos可以识别的引导盘)
+		- [4.1.1 关键代码](#411-关键代码)
+		- [4.1.2 代码主要结构流程图](#412-代码主要结构流程图)
+		- [4.1.3 函数调用图](#413-函数调用图)
+		- [4.1.4 实验结果](#414-实验结果)
+		- [4.1.5 实验分析](#415-实验分析)
+	- [4.2 实验2 一个最简单的Loader](#42-实验2-一个最简单的loader)
+		- [4.2.1 关键代码](#421-关键代码)
+		- [4.2.2 代码主要结构流程图](#422-代码主要结构流程图)
+		- [4.2.3 调试过程](#423-调试过程)
+		- [4.2.4 实验结果](#424-实验结果)
+		- [4.2.5 实验分析](#425-实验分析)
+	- [4.3 实验3 向Loader交出控制权](#43-实验3-向loader交出控制权)
+		- [4.3.1 关键代码](#431-关键代码)
+		- [4.3.2 代码主要结构流程图](#432-代码主要结构流程图)
+		- [4.3.3 函数调用图](#433-函数调用图)
+		- [4.3.4 实验结果](#434-实验结果)
+		- [4.3.5 实验分析](#435-实验分析)
+- [5 内核雏形](#5-内核雏形)
+	- [5.1 实验1 在Linux下用汇编写Hello World](#51-实验1-在linux下用汇编写hello-world)
+		- [5.1.1 关键代码](#511-关键代码)
+		- [5.1.2 代码主要结构流程图](#512-代码主要结构流程图)
+		- [5.1.3 调试过程](#513-调试过程)
+		- [5.1.4 实验结果](#514-实验结果)
+		- [5.1.5 实验分析](#515-实验分析)
+	- [5.2 实验2 再进一步，汇编和C同步使用](#52-实验2-再进一步汇编和c同步使用)
+		- [5.2.1 关键代码](#521-关键代码)
+		- [5.2.2 代码主要结构流程图](#522-代码主要结构流程图)
+		- [5.2.3 函数调用图](#523-函数调用图)
+		- [5.2.4 调试过程](#524-调试过程)
+		- [5.2.5 实验结果](#525-实验结果)
+		- [5.2.6 实验分析](#526-实验分析)
+	- [5.3 实验3 从Loader到内核](#53-实验3-从loader到内核)
+		- [5.3.1 关键代码](#531-关键代码)
+		- [5.3.2 代码主要结构流程图](#532-代码主要结构流程图)
+		- [5.3.3 调试过程](#533-调试过程)
+		- [5.3.4 实验结果](#534-实验结果)
+		- [5.3.5 实验分析](#535-实验分析)
+	- [5.4 实验4 进入保护模式，并显示内存使用状况](#54-实验4-进入保护模式并显示内存使用状况)
+		- [5.4.1 关键代码](#541-关键代码)
+		- [5.4.2 代码主要结构流程图](#542-代码主要结构流程图)
+		- [5.4.3 函数调用图](#543-函数调用图)
+		- [5.4.4 实验结果](#544-实验结果)
+	- [5.5 实验 5 向内核交出控制权](#55-实验-5-向内核交出控制权)
+		- [5.5.1 关键代码](#551-关键代码)
+		- [5.5.2 调试过程](#552-调试过程)
+		- [5.5.3 实验结果](#553-实验结果)
+- [6 进程](#6-进程)
+	- [6.1 实验1 最简单的进程](#61-实验1-最简单的进程)
+		- [6.1.1 关键代码](#611-关键代码)
+		- [6.1.2 代码主要结构流程图](#612-代码主要结构流程图)
+		- [6.1.3 函数调用图](#613-函数调用图)
+		- [6.1.4 实验结果](#614-实验结果)
+		- [6.1.5 实验分析](#615-实验分析)
+	- [6.2 实验2 丰富中断处理程序](#62-实验2-丰富中断处理程序)
+		- [6.2.1 关键代码](#621-关键代码)
+		- [6.2.2 代码主要结构流程图](#622-代码主要结构流程图)
+		- [6.2.3 实验结果](#623-实验结果)
+		- [6.2.4 实验分析](#624-实验分析)
+	- [6.3 实验3 中断重入](#63-实验3-中断重入)
+		- [6.3.1 关键代码](#631-关键代码)
+		- [6.3.2 代码主要结构流程图](#632-代码主要结构流程图)
+		- [6.3.3 实验结果](#633-实验结果)
+		- [6.3.4 实验分析](#634-实验分析)
+- [7 输入/输入系统](#7-输入输入系统)
+	- [7.1 实验1 从中断开始——键盘初体验](#71-实验1-从中断开始键盘初体验)
+		- [7.1.1 关键代码](#711-关键代码)
+		- [7.1.2 代码主要结构流程图](#712-代码主要结构流程图)
+		- [7.1.3 函数调用图](#713-函数调用图)
+		- [7.1.4 实验结果](#714-实验结果)
+		- [7.1.5 实验分析](#715-实验分析)
+	- [7.2 实验2 从缓冲区读取信息并打印读取的值](#72-实验2-从缓冲区读取信息并打印读取的值)
+		- [7.2.1 关键代码](#721-关键代码)
+		- [7.2.2 代码主要结构流程图](#722-代码主要结构流程图)
+		- [7.2.3 实验结果](#723-实验结果)
+		- [7.2.4 实验分析](#724-实验分析)
+	- [7.3 实验3 扫描码解析数组、键盘输入缓冲区、与使用新加的任务处理键盘操作](#73-实验3-扫描码解析数组键盘输入缓冲区与使用新加的任务处理键盘操作)
+		- [7.3.1 关键代码](#731-关键代码)
+		- [7.3.2 代码主要结构流程图](#732-代码主要结构流程图)
+		- [7.3.3 实验结果](#733-实验结果)
+		- [7.3.4 实验分析](#734-实验分析)
+	- [7.4 实验4 解析扫描码——让字符显示出来](#74-实验4-解析扫描码让字符显示出来)
+		- [7.4.1 关键代码](#741-关键代码)
+		- [7.4.2 代码主要结构流程图](#742-代码主要结构流程图)
+		- [7.4.3 实验结果](#743-实验结果)
+		- [7.4.4 实验分析](#744-实验分析)
+- [8 实验总结](#8-实验总结)
+	- [8.1实验中遇到的错误](#81实验中遇到的错误)
+		- [8.1.1 bochs配置文件bochsrc有关的问题](#811-bochs配置文件bochsrc有关的问题)
+		- [8.1.2 \_\_stack\_chk\_fail错误](#812-__stack_chk_fail错误)
+		- [8.1.3 出现挂载点/mnt/floppy不存在的提示](#813-出现挂载点mntfloppy不存在的提示)
+		- [8.1.4  gcc指令相关问题](#814--gcc指令相关问题)
+		- [8.1.5  makefile相关问题](#815--makefile相关问题)
+		- [8.1.6 找不到引导扇区的问题](#816-找不到引导扇区的问题)
+		- [8.1.7  ld指令出现incompatible with i386:x86-64 output](#817--ld指令出现incompatible-with-i386x86-64-output)
+	- [8.2 实验总结与心得](#82-实验总结与心得)
+- [9 参考文献](#9-参考文献)
+
 
 ## 1 实验环境的简介与搭建
 
@@ -50,7 +178,7 @@ sudo apt-get install bison
 
 ​	安装完成后，在终端输入命令：bochs，显示如图1-1所示。
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143119272.png" alt="image-20230320143119272" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143119272.png" alt="image-20230320143119272" style="zoom:50%;" />
 
 <center>图 1-1 bochs安装成功后的显示</center>
 
@@ -146,7 +274,7 @@ sequenceDiagram
 
 ​	想要进行操作系统的调试，首先必须创建一个软盘映像，为了达成这个目标，必须使用bximage软件在打开bximgae后，依次输入1->fd->回车->回车，即可生成一个名为a.img的软盘映像，如下图2-1所示。
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143215611.png" alt="image-20230320143215611" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143215611.png" alt="image-20230320143215611" style="zoom:50%;" />
 
 <center>图2-1 bximage操作界面</center>
 
@@ -199,7 +327,7 @@ boot:floppy
 ​	即可开始调试过程，按下回车键，会进入启动界面。
 ​	这时，需要再输入c（代表开始调试），再按下回车键，即会进入bochs页面，这时，在我们屏幕的左上角会出现一行红色的“Hello, OS world!”，即代表调试成功，调试结果如下图所示。
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143244527.png" alt="image-20230320143244527" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143244527.png" alt="image-20230320143244527" style="zoom:50%;" />
 
 #### 2.1.6 实验分析
 
@@ -402,7 +530,7 @@ st->op1->op2->op3->op4->op5->e
 
 ​	接下来，启动Bochs，按下回车键开始仿真，再输入c并且按下回车键开始调试，运行成功，如图3-1所示。 
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143317572.png" alt="image-20230320143317572" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143317572.png" alt="image-20230320143317572" style="zoom:50%;" />
 
 <center>图3-1 实验结果</center>
 
@@ -596,7 +724,7 @@ sudp umount /mnt/floppy
 ​	`B:\pmtest2.com`
 ​	这样子，pmtest2.com运行成功，如下图所示。
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143350428.png" alt="image-20230320143350428" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143350428.png" alt="image-20230320143350428" style="zoom:67%;" />
 
 可以看到，程序打印出了两行数字，第一行全部是0，说明开始内存5MB处都是0，而下一行已经变成了41、42、43...，说明写操作成功（十六进制的41、42、43...48正是A、B、C...H）。
 
@@ -721,7 +849,7 @@ sequenceDiagram
 
 可以看到，在下图中，的确出现了“In Protect Mode Now.”字符串和一个红色的L，这说明我们的程序是成功与正确的。
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143419421.png" alt="image-20230320143419421" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143419421.png" alt="image-20230320143419421" style="zoom:67%;" />
 
 #### 3.3.6 实验分析
 
@@ -812,7 +940,7 @@ sequenceDiagram
 
 #### 4.1.4 实验结果
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143439464.png" alt="image-20230320143439464" style="zoom:67%;" />![image-20230320143505893](E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143505893.png)
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143439464.png" alt="image-20230320143439464" style="zoom:67%;" />
 
 ​	可以看到，调试结果同实验2.1，只不过这时我们已经为我们的引导扇区加入了BPB等头信息，使其可以被微软识别。
 
@@ -1003,7 +1131,7 @@ sudo umount /mnt/floppy
 
 #### 4.2.4 实验结果
 
-![image-20230320143505893](E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143505893.png)
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143505893.png" alt="image-20230320143505893" style="zoom:67%;" />
 
 #### 4.2.5 实验分析
 
@@ -1144,7 +1272,7 @@ sequenceDiagram
 
 #### 4.3.4 实验结果
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143530648.png" alt="image-20230320143530648" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143530648.png" alt="image-20230320143530648" style="zoom:67%;" />
 
 ​	可以看到，屏幕上出现了Booting和Ready的字样，代表程序进入引导扇区和进入引导扇区结束，紧接着，程序跳转入Loader，在屏幕最上方的正中间打印了一个白色的“L”字，调试结果说明实验成功。
 
@@ -1217,7 +1345,7 @@ ld -m elf_i386 -s hello.o -o hello
 
 #### 5.1.4 实验结果
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143549283.png" alt="image-20230320143549283" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143549283.png" alt="image-20230320143549283" style="zoom:67%;" />
 
 #### 5.1.5 实验分析
 
@@ -1312,7 +1440,7 @@ ld  -m elf_i386 -s -o foobar foo.o bar.o
 
 #### 5.2.5 实验结果
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143610688.png" alt="image-20230320143610688" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143610688.png" alt="image-20230320143610688" style="zoom:67%;" />
 
 ​	在本实验中，定义了num1=3，num2=4，程序输出大的那个数的结果，可以看到，程序输出了“the 2nd one”的字样，成功的完成了任务。
 
@@ -1552,7 +1680,7 @@ sudo umount /mnt/floppy/
 
 #### 5.3.4 实验结果
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143635720.png" alt="image-20230320143635720" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143635720.png" alt="image-20230320143635720" style="zoom:67%;" />
 
 ​	可以看到，在上一个实验的基础上，这次的实验结果多出了“Loading.........”及“Ready.”这样的两行，说明我们已经载入了内核，并且由Loader读取了一个扇区。不过，由于目前我们除了把内核加载到内存之外没有做其他任何工作，所以除了能看到“Ready.”的字样之外，并没有其他现象出现。
 
@@ -1772,7 +1900,7 @@ sequenceDiagram
 
 #### 5.4.4 实验结果
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143657532.png" alt="image-20230320143657532" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143657532.png" alt="image-20230320143657532" style="zoom:67%;" />
 
 ​	看到字母“P”，说明我们已经成功地进入保护模式，下方显示的RAM size列出了内存使用状况。
 
@@ -1816,7 +1944,7 @@ sudo umount /mnt/floppy/
 
 #### 5.5.3 实验结果
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143713797.png" alt="image-20230320143713797" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143713797.png" alt="image-20230320143713797" style="zoom:67%;" />
 
 ​	第一行中央出现字符”k”，这表明我们的内核正在执行了。
 
@@ -1946,7 +2074,7 @@ sequenceDiagram
 
 #### 6.1.4 实验结果
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143734465.png" alt="image-20230320143734465" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143734465.png" alt="image-20230320143734465" style="zoom:67%;" />
 
 ​	由调试结果，我们看到了不断出现的字符“A”和不断增加的数字，这代表我们的进程已经开始运行，我们的调试成功了。
 
@@ -2055,7 +2183,7 @@ st->op1->op2->op3->op4->op5->op6->e
 
 #### 6.2.3 实验结果
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143759806.png" alt="image-20230320143759806" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143759806.png" alt="image-20230320143759806" style="zoom:67%;" />
 
 #### 6.2.4 实验分析
 
@@ -2128,7 +2256,7 @@ cond(no)->op4->op5->e
 
 #### 6.3.3 实验结果
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143819577.png" alt="image-20230320143819577" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143819577.png" alt="image-20230320143819577" style="zoom:67%;" />
 
 #### 6.3.4 实验分析
 
@@ -2203,7 +2331,7 @@ sequenceDiagram
 
 #### 7.1.4 实验结果
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143838177.png" alt="image-20230320143838177" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143838177.png" alt="image-20230320143838177" style="zoom:67%;" />
 
 ​	可以看到，当敲击键盘之后，程序中出现了一个“\*”的字符，但再次敲击键盘后，键盘却不会再次相应，即屏幕上不会出现第二个“\*”字符。
 
@@ -2244,7 +2372,7 @@ st->op1->op2->op3->op4->op5->e
 
 #### 7.2.3 实验结果
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143856229.png" alt="image-20230320143856229" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143856229.png" alt="image-20230320143856229" style="zoom:67%;" />
 
 ​	在上图中，我们连续连续敲击了四个键，而实验结果则一共出现了8组代码：0x26、0xA6、0x17、0x97、0x2D、0xAD、0x2A、0xAA，分别对应于字符的Make Code和Break Code。
 
@@ -2352,7 +2480,7 @@ st->op1->op2->op3->op4->op5->op6->e
 
 #### 7.3.3 实验结果
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143915501.png" alt="image-20230320143915501" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143915501.png" alt="image-20230320143915501" style="zoom:67%;" />
 
 ​	可以看到，调试结果同前一个实验相比并没有出现变化，因为我们仅仅只是通过任务来处理扫描码，但还没有对扫描码进行解析。
 
@@ -2422,7 +2550,7 @@ st->op1->op2->op3->op4->op5->op6->op7->e
 
 #### 7.4.3 实验结果
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143935665.png" alt="image-20230320143935665" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143935665.png" alt="image-20230320143935665" style="zoom:67%;" />
 
 ​	可以看到，目前我们的程序已经可以对小写a-z以及0-9进行正常的响应，不过仍然无法打印出大写字母，对shift、alt、ctrl、fn等按键则会输出意义不明的字符。
 
@@ -2464,7 +2592,7 @@ vgaromimage:file=/home/zhaohan/bochs-2.7/bios/VGABIOS-lgpl-latest
 
 ​	在使用make命令进行编译连接时，会出现如下图所示的错误
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320143951671.png" alt="image-20230320143951671" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320143951671.png" alt="image-20230320143951671" style="zoom:67%;" />
 
 ​	原因是因为gcc编译器会自动进行堆栈越界检查，想要避免错误，可以将Makefile文件中的配置“$(CC) $(CFLAGS) -o $@ $<”修改为“$(CC) $(CFLAGS) -fno-stack-protector -o $@ $<”，即可解决问题，
 
@@ -2481,7 +2609,7 @@ vgaromimage:file=/home/zhaohan/bochs-2.7/bios/VGABIOS-lgpl-latest
 
 在实验6 7中需要用到makefile文件辅助编译和连接，以实验6.1为例，直接在终端输入make指令会出现如下错误
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320144007995.png" alt="image-20230320144007995" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320144007995.png" alt="image-20230320144007995" style="zoom:67%;" />
 
 ​	这是由于两个问题：一个是64位ubuntu中gcc ld指令的报错问题，还有一个是使用堆栈引发的冲突。
 ​	这就需要我们修改makefile文件，将makefile文件中的
@@ -2505,7 +2633,7 @@ LD		= ld -m elf_i386
 
 在实验3.1中，初次编译运行bochs出现了如下问题，如图所示：
 
-<img src="E:\大学作业\大二作业\操作系统课程设计\git repo\assets\image-20230320144021338.png" alt="image-20230320144021338" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/Lunr127/Implementation-of-a-simple-linux-system/main/assets/image-20230320144021338.png" alt="image-20230320144021338" style="zoom:67%;" />
 
 这是因为实验2中“hello os World”的那个a.img的最后两个字节在boot.asm中已经被填充为0xaa55,而我一开始是新创建的a.img，因此不能作为引导扇区使用。
 解决办法：直接把实验2文件夹的a.img复制过来，也可以使用参考书光盘文件里面提供的a.img。
