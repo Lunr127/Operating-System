@@ -134,27 +134,25 @@
 
 ### 1.1 VMware Workstation
 
-​	VMware Workstation是一款虚拟机软件，可以帮助我们在Windows操作系统之下运行一个Linux操作系统。
+​	VMware Workstation允许操作系统(OS)和应用程序(Application)在一台虚拟机内部运行。虚拟机是独立运行主机操作系统的离散环境。在 VMware Workstation 中，你可以在一个窗口中加载一台虚拟机，它可以运行自己的操作系统和应用程序。
 
-​	在《ORANGE’S：一个操作系统的实现》一书的实验中，我们选择在ubuntu环境下运行bochs、nasm、gcc等工具，因此我们需要下载vmware运行ubuntu虚拟机。
+​	在《ORANGE’S：一个操作系统的实现》一书的实验中，我们选择在 Ubuntu 环境下运行 bochs、nasm、gcc 等工具，因此我们需要下载 VMware 运行 Ubuntu 虚拟机。
 
 ### 1.2 Ubuntu
 
-​	Ubuntu 是一个以桌面应用为主的 Linux 操作系统。
+​	Ubuntu 是一个基于Debian的以桌面应用为主的Linux操作系统。Ubuntu的目标在于为一般用户提供一个最新同时又相当稳定，主要以自由软件建构而成的操作系统。
 
-​	我首先在官网下载了在下载了相应的镜像文件ubuntu-22.04-desktop-amd64.iso后，在vmware中配置生成相应Ubuntu 64位虚拟机
-
-​	在配置完资源之后，在创建的虚拟机界面中点击“开启此虚拟机”，进入系统设置界面。完成初始设置以及相关安装包下载后，进入Ubuntu主界面。
+​	官网下载相应的镜像文件ubuntu-22.04-desktop-amd64.iso，在 VMware 中配置生成相应 Ubuntu 64 位虚拟机
 
 ### 1.3 Bochs
 
-​	在安装完虚拟机和操作系统之后，为了能够对编写的源代码进行编译和仿真，还必须下载相应的程序。
+​	为了能够对编写的源代码进行编译和仿真，还必须下载相应的程序。
 
-​	对于仿真程序，《ORANGE’S：一个操作系统的实现》一书中选择使用虚拟计算机Bochs进行仿真。
+​	对于仿真程序，《ORANGE’S：一个操作系统的实现》一书中选择使用 Bochs 进行仿真。
 
-​	Bochs是一个x86硬件平台的开源模拟器。它可以模拟各种硬件的配置。Bochs模拟的是整个PC平台，包括I/O设备、内存和BIOS。
+​	Bochs是一个x86硬件平台的开源模拟器。它可以模拟各种硬件的配置。Bochs模拟的是整个PC平台，包括I/O设备、内存和BIOS。更为有趣的是，甚至可以不使用PC硬件来运行Bochs。事实上，它可以在任何编译运行Bochs的平台上模拟x86硬件。通过改变配置，可以指定使用的CPU(386、486或者586)，以及内存大小等。
 
-安装过程参考博客https://blog.csdn.net/Sunnil/article/details/79243192的教程：
+安装过程参考博客https://zhuanlan.zhihu.com/p/54771795的教程：
 
 ​	首先，在终端安装如下几个包：
 
@@ -184,9 +182,9 @@ sudo apt-get install bison
 
 ### 1.4 NASM、GCC和GNU MAKE
 
-​	在《ORANGE’S：一个操作系统的实现》一书中，所编写的操作系统是由汇编语言和C语言共同完成的，为了编译汇编语言，必须安装NASM程序，为了编译C语言，必须安装NASM程序，同时，还必须安装GNU Make，用于自动化编译和链接。
+​	在《ORANGE’S：一个操作系统的实现》一书中，所编写的操作系统是由汇编语言和C语言共同完成的，为了编译汇编语言，必须安装 NASM 程序，为了编译C语言，必须安装 NASM 程序，同时，还必须安装 GNU Make，用于自动化编译和链接。
 
-​	在Ubuntu中，已经预安装了GCC和NASM这两个程序，其余部分包，已经在1.3步骤中的第一步安装完成。
+​	在 Ubuntu 中，已经预安装了 GCC 和 NASM 这两个程序，其余部分包，已经在1.3步骤中的第一步安装完成。
 
 ------
 
